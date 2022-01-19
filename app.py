@@ -110,19 +110,17 @@ def index():
     result3 = str(figdata_png)[2:-1]
 
     ## Buatlah sebuah plot yang menampilkan insight di dalam data 
-    top_paid = df2[df2['Type']=='Paid'].sort_values(['Installs','Reviews','Rating'],ascending=False).head().reset_index(drop=True)
+    top_paid = df2[df2['Type']=='Paid'].sort_values(['Installs','Reviews'],ascending=False).head().reset_index(drop=True)
     x = top_paid.App
     y1 = top_paid.Installs
     y2 = top_paid.Reviews
-    y3 = top_paid.Rating
 
     width=0.5
     fig = plt.figure(figsize=(12,8))
     fig.add_subplot()
     plt.bar(x, y1,width, color='r')
     plt.bar(x, y2,width, bottom=y1, color='b')
-    plt.bar(x, y3,width, bottom=y1+y2, color='y')
-    plt.legend(["Installs", "Reviews", "Rating"],fontsize=12)
+    plt.legend(["Installs", "Reviews"],fontsize=12)
     plt.savefig('top_paid.png',bbox_inches="tight")
 
     igfile = BytesIO()
